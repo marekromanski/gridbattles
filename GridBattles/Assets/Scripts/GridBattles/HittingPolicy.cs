@@ -1,6 +1,4 @@
-﻿
-
-namespace GridBattles
+﻿namespace GridBattles
 {
     public interface IHittingPolicy
     {
