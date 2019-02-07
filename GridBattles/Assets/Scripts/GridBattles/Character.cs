@@ -2,18 +2,24 @@
 {
     public class Character
     {
-        private int level; 
-        private int hitPoints;
+        private int _level; 
+        private int _hitPoints;
+        private IHittingPolicy _hittingPolicy;
+        
         public Character()
         {
-            level = 1;
-            hitPoints = 0;
+            _level = 1;
+            _hitPoints = 0;
+        }
+
+        public void SetHittingPolicy(IHittingPolicy policy)
+        {
+            _hittingPolicy = policy;
         }
 
         public void Attack(Character target)
         {
-            var hittingPolicy = GameRules.Get().GetHittingPolicy();
-            if (hittingPolicy.DetermineHit(this, target))
+            if (_hittingPolicy.DetermineHit(this, target))
             {
                 target.ApplyDamage(1);
             }
@@ -21,17 +27,17 @@
 
         private void ApplyDamage(int damage)
         {
-            hitPoints -= damage;
+            _hitPoints -= damage;
         }
 
         public int GetLevel()
         {
-            return level;
+            return _level;
         }
 
         public int GetHitPoints()
         {
-            return hitPoints;
+            return _hitPoints;
         }
     }
 
