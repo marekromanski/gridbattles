@@ -14,6 +14,13 @@ namespace Tests
         }
 
         [Test]
+        public void NewCharacterHas10Ac()
+        {
+            var character = new Character();
+            Assert.AreEqual(10, character.GetAc());
+        }
+
+        [Test]
         public void MissedAttackDoesntCauseDamage()
         {
             IHittingPolicy policy = new AlwaysMissingPolicy();

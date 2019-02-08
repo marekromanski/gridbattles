@@ -1,15 +1,21 @@
-﻿namespace GridBattles
+﻿using System.Runtime.InteropServices;
+
+namespace GridBattles
 {
     public class Character
     {
         private int _level; 
         private int _hitPoints;
+        private int _ac;
         private IHittingPolicy _hittingPolicy;
-        
+        private int _attackBonus;
+
         public Character()
         {
             _level = 1;
             _hitPoints = 0;
+            _ac = 10;
+            _attackBonus = 0;
         }
 
         public void SetHittingPolicy(IHittingPolicy policy)
@@ -38,6 +44,21 @@
         public int GetHitPoints()
         {
             return _hitPoints;
+        }
+
+        public int GetAc()
+        {
+            return _ac;
+        }
+
+        public void SetAttackBonus(int attackBonus)
+        {
+            _attackBonus = attackBonus;
+        }
+
+        public int GetAttackBonus()
+        {
+            return _attackBonus;
         }
     }
 
