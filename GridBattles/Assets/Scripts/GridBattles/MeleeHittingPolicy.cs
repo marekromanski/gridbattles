@@ -22,12 +22,17 @@ namespace GridBattles
                 return false;
             }
 
-            if (roll + source.GetAttackBonus() >= target.GetAc())
+            if (roll + GetAttackBonus(source) >= target.GetAc())
             {
                 return true;
             }
 
             return false;
+        }
+
+        public int GetAttackBonus(Character character)
+        {
+            return character.GetAttackBonus();
         }
     }
 

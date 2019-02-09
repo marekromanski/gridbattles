@@ -77,5 +77,13 @@ namespace Tests
 
             Assert.IsFalse(sut.DetermineHit(_source, _target));
         }
+
+        [Test]
+        public void MeleeAttackUsesModifierFrmStrengthByDefault()
+        {
+            MeleeHittingPolicy sut = new MeleeHittingPolicy(new CriticalSuccessSource());
+
+            Assert.AreEqual(0, sut.GetAttackBonus(_source));
+        }
     }
 }
