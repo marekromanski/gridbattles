@@ -22,17 +22,13 @@ namespace GridBattles
                 return false;
             }
 
-            if (roll + GetAttackBonus(source) >= target.GetAc())
-            {
-                return true;
-            }
-
-            return false;
+            return roll + GetAttackBonus(source) >= target.GetAc();
         }
 
         public int GetAttackBonus(Character character)
         {
-            return character.GetAttackBonus();
+            var strengthScore = character.GetStrength();
+            return AbilityScoreCalculator.CalculateModifier(strengthScore);
         }
     }
 

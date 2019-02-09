@@ -1,19 +1,30 @@
-﻿namespace GridBattles
+﻿using System.Collections.Generic;
+
+namespace GridBattles
 {
     public class Character
     {
-        private int _level; 
+        private int _level;
         private int _hitPoints;
         private int _ac;
         private IHittingPolicy _hittingPolicy;
-        private int _attackBonus;
+        private Dictionary<Attributes, int> _abilities;
 
         public Character()
         {
             _level = 1;
             _hitPoints = 0;
             _ac = 10;
-            _attackBonus = 0;
+
+            _abilities = new Dictionary<Attributes, int>
+            {
+                {Attributes.Strength, 10},
+                {Attributes.Dexterity, 10},
+                {Attributes.Constitution, 10},
+                {Attributes.Intelligence, 10},
+                {Attributes.Wisdom, 10},
+                {Attributes.Charisma, 10},
+            };
         }
 
         public void SetHittingPolicy(IHittingPolicy policy)
@@ -49,20 +60,14 @@
             return _ac;
         }
 
-        public void SetAttackBonus(int attackBonus)
-        {
-            _attackBonus = attackBonus;
-        }
-
-        public int GetAttackBonus()
-        {
-            return _attackBonus;
-        }
-
         public int GetStrength()
         {
-            return 10;
+            return _abilities[Attributes.Strength];
+        }
+
+        public void SetAttribute(Attributes attributes, int score)
+        {
+            _abilities[attributes] = score;
         }
     }
-
 }

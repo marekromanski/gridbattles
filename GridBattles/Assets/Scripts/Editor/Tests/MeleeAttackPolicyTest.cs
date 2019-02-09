@@ -52,7 +52,7 @@ namespace Tests
             var random = new ControlledRandomSource {nextResult = 9};
 
             MeleeHittingPolicy sut = new MeleeHittingPolicy(random);
-            _source.SetAttackBonus(1);
+            _source.SetAttribute(Attributes.Strength, 12);
 
             Assert.IsTrue(sut.DetermineHit(_source, _target));
         }
@@ -73,17 +73,19 @@ namespace Tests
             var random = new ControlledRandomSource {nextResult = 1};
 
             MeleeHittingPolicy sut = new MeleeHittingPolicy(random);
-            _source.SetAttackBonus(10);
+            _source.SetAttribute(Attributes.Strength, 30);
 
             Assert.IsFalse(sut.DetermineHit(_source, _target));
         }
 
         [Test]
-        public void MeleeAttackUsesModifierFrmStrengthByDefault()
+        public void MeleeAttackUsesModifierFromStrength()
         {
             MeleeHittingPolicy sut = new MeleeHittingPolicy(new CriticalSuccessSource());
 
-            Assert.AreEqual(0, sut.GetAttackBonus(_source));
+            _source.SetAttribute(Attributes.Strength, 14);
+
+            Assert.AreEqual(2, sut.GetAttackBonus(_source));
         }
     }
 }
