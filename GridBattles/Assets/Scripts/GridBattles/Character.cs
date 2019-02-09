@@ -1,6 +1,4 @@
-﻿using System.Runtime.InteropServices;
-
-namespace GridBattles
+﻿namespace GridBattles
 {
     public class Character
     {

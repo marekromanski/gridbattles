@@ -17,13 +17,16 @@ namespace GridBattles
                 return true;
             }
 
-            int ac = target.GetAc();
-            int bonus = source.GetAttackBonus();
-            int total = roll + bonus;
-            if (total >= ac)
+            if (roll == 1)
+            {
+                return false;
+            }
+
+            if (roll + source.GetAttackBonus() >= target.GetAc())
             {
                 return true;
-            } 
+            }
+
             return false;
         }
     }
