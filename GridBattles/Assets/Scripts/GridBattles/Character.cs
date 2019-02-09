@@ -58,6 +58,11 @@
         {
             return _attackBonus;
         }
+
+        public int GetStrength()
+        {
+            return 10;
+        }
     }
 
 }

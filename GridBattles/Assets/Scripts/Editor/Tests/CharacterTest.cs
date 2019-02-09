@@ -21,6 +21,13 @@ namespace Tests
         }
 
         [Test]
+        public void NewCharacterHas10Strength()
+        {
+            var character = new Character();
+            Assert.AreEqual(10, character.GetStrength());
+        }
+
+        [Test]
         public void MissedAttackDoesntCauseDamage()
         {
             IHittingPolicy policy = new AlwaysMissingPolicy();

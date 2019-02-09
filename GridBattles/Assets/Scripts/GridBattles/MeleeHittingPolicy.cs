@@ -1,10 +1,10 @@
 namespace GridBattles
 {
-    public class StrengthHittingPolicy : IHittingPolicy
+    public class MeleeHittingPolicy : IHittingPolicy
     {
         private readonly IRandomSource _randomSource;
 
-        public StrengthHittingPolicy(IRandomSource randomSource)
+        public MeleeHittingPolicy(IRandomSource randomSource)
         {
             _randomSource = randomSource;
         }
