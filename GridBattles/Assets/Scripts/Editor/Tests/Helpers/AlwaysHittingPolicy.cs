@@ -4,7 +4,7 @@ namespace Tests.Helpers
 {
     public class AlwaysHittingPolicy : IHittingPolicy
     {
-        public bool DetermineHit(Character source, Character target)
+        public bool DetermineHit(Creature source, Creature target)
         {
             return true;
         }

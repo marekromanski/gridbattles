@@ -2,6 +2,6 @@
 {
     public interface IHittingPolicy
     {
-        bool DetermineHit(Character source, Character target);
+        bool DetermineHit(Creature source, Creature target);
     }
 }

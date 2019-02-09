@@ -9,7 +9,7 @@ namespace GridBattles
             _randomSource = randomSource;
         }
 
-        public bool DetermineHit(Character source, Character target)
+        public bool DetermineHit(Creature source, Creature target)
         {
             var roll = _randomSource.GetRandom();
             if (roll == 20)
@@ -25,9 +25,9 @@ namespace GridBattles
             return roll + GetAttackBonus(source) >= target.GetAc();
         }
 
-        public int GetAttackBonus(Character character)
+        public int GetAttackBonus(Creature creature)
         {
-            var strengthScore = character.GetStrength();
+            var strengthScore = creature.GetStrength();
             return AbilityScoreCalculator.CalculateModifier(strengthScore);
         }
     }

@@ -2,7 +2,7 @@
 
 namespace GridBattles
 {
-    public class Character
+    public class Creature
     {
         private int _level;
         private int _hitPoints;
@@ -10,7 +10,7 @@ namespace GridBattles
         private IHittingPolicy _hittingPolicy;
         private Dictionary<Attributes, int> _abilities;
 
-        public Character()
+        public Creature()
         {
             _level = 1;
             _hitPoints = 0;
@@ -32,7 +32,7 @@ namespace GridBattles
             _hittingPolicy = policy;
         }
 
-        public void Attack(Character target)
+        public void Attack(Creature target)
         {
             if (_hittingPolicy.DetermineHit(this, target))
             {
@@ -68,6 +68,16 @@ namespace GridBattles
         public void SetAttribute(Attributes attributes, int score)
         {
             _abilities[attributes] = score;
+        }
+
+        public int GetProficiencyBonus()
+        {
+            return 2 + (_level -1 ) / 4;
+        }
+
+        public void SetLevel(int level)
+        {
+            _level = level;
         }
     }
 }

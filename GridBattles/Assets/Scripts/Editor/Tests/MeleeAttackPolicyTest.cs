@@ -6,14 +6,14 @@ namespace Tests
 {
     public class MeleeAttackPolicyTest
     {
-        private Character _target;
-        private Character _source;
+        private Creature _target;
+        private Creature _source;
 
         [SetUp]
         public void CreateActors()
         {
-            _source = new Character();
-            _target = new Character();
+            _source = new Creature();
+            _target = new Creature();
         }
 
         [Test]
