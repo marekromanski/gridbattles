@@ -6,37 +6,41 @@ namespace Tests
 {
     public class MeleeDamagePolicyTest
     {
-        [Test]
-        public void UnarmedStrikeDeals1DamageWithoutModifiers()
+        private Creature _source;
+        private MeleeDamagePolicy _sut;
+
+        [SetUp]
+        public void CreateActors()
         {
-            MeleeDamagePolicy sut = new MeleeDamagePolicy();
-            Creature source = new Creature();
-            Assert.AreEqual(1, sut.CalculateDamage(source, null));
+            _source = new Creature();
+            _sut = new MeleeDamagePolicy();
         }
 
         [Test]
-        public void UnArmedStrikeAddsStrenthModifierToDamage()
+        public void UnarmedStrikeDeals1DamageWithoutModifiers()
         {
-            MeleeDamagePolicy sut = new MeleeDamagePolicy();
+            Assert.AreEqual(1, _sut.CalculateDamage(_source, null));
+        }
 
-            Creature source = new Creature();
-            source.SetAttribute(Attributes.Strength, 12);
-
-            Assert.AreEqual(2, sut.CalculateDamage(source, null));
+        [Test]
+        public void UnarmedStrikeAddsStrengthModifierToDamage()
+        {
+            _source.SetAttribute(Attributes.Strength, 12);
+            Assert.AreEqual(2, _sut.CalculateDamage(_source, null));
         }
 
         [Test]
         public void WeaponStrikeUsesWeaponDieForDamage()
         {
-            MeleeDamagePolicy sut = new MeleeDamagePolicy();
-            ControlledRandomSource random = new ControlledRandomSource();
-            random.NextResult = 4;
+            ControlledRandomSource random = new ControlledRandomSource
+            {
+                NextResult = 0
+            };
 
-            Creature source = new Creature();
-            Weapon weapon = new Weapon(4);
-            source.EquipWeapon(weapon);
+            Weapon weapon = new Weapon(1, 4);
+            _source.EquipWeapon(weapon);
 
-            Assert.AreEqual(4, sut.CalculateDamage(source, random));
+            Assert.AreEqual(1, _sut.CalculateDamage(_source, random));
         }
     }
 }

@@ -8,16 +8,17 @@ namespace GridBattles
         private int _hitPoints;
         private int _ac;
         private IHittingPolicy _hittingPolicy;
-        private Dictionary<Attributes, int> _abilities;
-        private Weapon _weapon;
+        private readonly Dictionary<Attributes, int> _attributes;
+        private IWeapon _weapon;
 
         public Creature()
         {
             _level = 1;
             _hitPoints = 0;
             _ac = 10;
+            _weapon = new UnarmedStrike();
 
-            _abilities = new Dictionary<Attributes, int>
+            _attributes = new Dictionary<Attributes, int>
             {
                 {Attributes.Strength, 10},
                 {Attributes.Dexterity, 10},
@@ -63,17 +64,17 @@ namespace GridBattles
 
         public int GetStrength()
         {
-            return _abilities[Attributes.Strength];
+            return _attributes[Attributes.Strength];
         }
 
         public void SetAttribute(Attributes attributes, int score)
         {
-            _abilities[attributes] = score;
+            _attributes[attributes] = score;
         }
 
         public int GetProficiencyBonus()
         {
-            return 2 + (_level -1 ) / 4;
+            return 2 + (_level - 1) / 4;
         }
 
         public void SetLevel(int level)
@@ -81,12 +82,12 @@ namespace GridBattles
             _level = level;
         }
 
-        public void EquipWeapon(Weapon weapon)
+        public void EquipWeapon(IWeapon weapon)
         {
             _weapon = weapon;
         }
 
-        public Weapon GetWeapon()
+        public IWeapon GetWeapon()
         {
             return _weapon;
         }
