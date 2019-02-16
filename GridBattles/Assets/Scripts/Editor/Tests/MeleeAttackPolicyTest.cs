@@ -39,7 +39,7 @@ namespace Tests
         [Test]
         public void AttackHitsIfItsTotalIsGreaterThanArmorClass()
         {
-            var random = new ControlledRandomSource {nextResult = 11};
+            var random = new ControlledRandomSource {NextResult = 11};
 
             MeleeHittingPolicy sut = new MeleeHittingPolicy(random);
 
@@ -49,7 +49,7 @@ namespace Tests
         [Test]
         public void AttackHitsIfItsTotalIsEqualToArmorClass()
         {
-            var random = new ControlledRandomSource {nextResult = 9};
+            var random = new ControlledRandomSource {NextResult = 9};
 
             MeleeHittingPolicy sut = new MeleeHittingPolicy(random);
             _source.SetAttribute(Attributes.Strength, 12);
@@ -60,7 +60,7 @@ namespace Tests
         [Test]
         public void AttackMissesIfItsTotalIsLowerThanAc()
         {
-            var random = new ControlledRandomSource {nextResult = 9};
+            var random = new ControlledRandomSource {NextResult = 9};
 
             MeleeHittingPolicy sut = new MeleeHittingPolicy(random);
 
@@ -70,7 +70,7 @@ namespace Tests
         [Test]
         public void AttackMissesIfTotalIsGreaterThanAcButRollIsCriticalFail()
         {
-            var random = new ControlledRandomSource {nextResult = 1};
+            var random = new ControlledRandomSource {NextResult = 1};
 
             MeleeHittingPolicy sut = new MeleeHittingPolicy(random);
             _source.SetAttribute(Attributes.Strength, 30);

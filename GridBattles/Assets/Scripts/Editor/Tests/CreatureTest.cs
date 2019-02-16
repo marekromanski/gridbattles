@@ -33,7 +33,7 @@ namespace Tests
         }
 
         [Test]
-        public void MissedAttackDoesntCauseDamage()
+        public void MissedAttackDoesNotCauseDamage()
         {
             IHittingPolicy policy = new AlwaysMissingPolicy();
 

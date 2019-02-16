@@ -9,6 +9,7 @@ namespace GridBattles
         private int _ac;
         private IHittingPolicy _hittingPolicy;
         private Dictionary<Attributes, int> _abilities;
+        private Weapon _weapon;
 
         public Creature()
         {
@@ -78,6 +79,16 @@ namespace GridBattles
         public void SetLevel(int level)
         {
             _level = level;
+        }
+
+        public void EquipWeapon(Weapon weapon)
+        {
+            _weapon = weapon;
+        }
+
+        public Weapon GetWeapon()
+        {
+            return _weapon;
         }
     }
 }

@@ -8,5 +8,10 @@ namespace Tests.Helpers
         {
             return 20;
         }
+
+        public int GetRandom(int max)
+        {
+            return 20;
+        }
     }
 }

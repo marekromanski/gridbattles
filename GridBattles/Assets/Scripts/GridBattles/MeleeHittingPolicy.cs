@@ -32,8 +32,4 @@ namespace GridBattles
         }
     }
 
-    public interface IRandomSource
-    {
-        int GetRandom();
-    }
 }

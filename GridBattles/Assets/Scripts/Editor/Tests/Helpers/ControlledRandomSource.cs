@@ -4,10 +4,15 @@ namespace Tests.Helpers
 {
     public class ControlledRandomSource : IRandomSource
     {
-        public int nextResult = 10;
+        public int NextResult = 10;
         public int GetRandom()
         {
-            return nextResult;
+            return NextResult;
+        }
+
+        public int GetRandom(int max)
+        {
+            return NextResult;
         }
     }
 }
