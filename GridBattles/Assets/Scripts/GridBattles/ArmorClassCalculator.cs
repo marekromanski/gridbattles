@@ -21,8 +21,12 @@
                 {
                     return MaxDexModifierForMediumArmor;
                 }
-
                 return dexModifier;
+            }
+
+            if (Armor.Kind.Heavy == armorKind)
+            {
+                return 0;
             }
 
             return dexModifier;

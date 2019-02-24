@@ -38,9 +38,27 @@ namespace Tests
             AssertCharacterWearingMediumArmorHasAcEqualToArmorAcPlusDexterityModifier(13, 16, 15);
         }
 
+        [Test]
+        public void CharacterWearingHeavyArmorHasAcEqualToArmorAcAndNoBonusesFromDex()
+        {
+            AssertCharacterWearingHeavyArmorHasAcEqualToArmorAc(15, 10, 15);
+            AssertCharacterWearingHeavyArmorHasAcEqualToArmorAc(15, 12, 15);
+            AssertCharacterWearingHeavyArmorHasAcEqualToArmorAc(15, 16, 15);
+        }
+
+        private static void AssertCharacterWearingHeavyArmorHasAcEqualToArmorAc(int armorAc, int dexterity, int expectedAc)
+        {
+            Armor lightArmor = new Armor(Armor.Kind.Heavy, armorAc);
+            Creature character = new Creature();
+            character.SetAttribute(Attributes.Dexterity, dexterity);
+            character.PutOnArmor(lightArmor);
+            var sut = new ArmorClassCalculator();
+            Assert.AreEqual(expectedAc, sut.CalculateAc(character));
+        }
+
+
         private static void AssertCharacterWearingMediumArmorHasAcEqualToArmorAcPlusDexterityModifier(int armorAc,
-            int dexterity,
-            int expectedAc)
+            int dexterity, int expectedAc)
         {
             Armor lightArmor = new Armor(Armor.Kind.Medium, armorAc);
             Creature character = new Creature();
@@ -51,8 +69,7 @@ namespace Tests
         }
 
         private static void AssertCharacterWearingLightArmorHasAcEqualToArmorAcPlusDexterityModifier(int armorAc,
-            int dexterity,
-            int expectedAc)
+            int dexterity, int expectedAc)
         {
             Armor lightArmor = new Armor(Armor.Kind.Light, armorAc);
             Creature character = new Creature();
