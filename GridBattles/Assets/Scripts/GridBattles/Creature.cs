@@ -10,6 +10,7 @@ namespace GridBattles
         private IHittingPolicy _hittingPolicy;
         private readonly Dictionary<Attributes, int> _attributes;
         private IWeapon _weapon;
+        private Armor _armor;
 
         public Creature()
         {
@@ -100,6 +101,20 @@ namespace GridBattles
         public int GetAttributeModifier(Attributes attribute)
         {
             return AbilityScoreCalculator.CalculateModifier(GetAttribute(attribute));
+        }
+
+        public void PutOnArmor(Armor armor)
+        {
+            _armor = armor;
+        }
+
+        public Armor GetArmor()
+        {
+            if (_armor == null)
+            {
+                return new Armor(Armor.Kind.Light, 10);
+            }
+            return _armor;
         }
     }
 }

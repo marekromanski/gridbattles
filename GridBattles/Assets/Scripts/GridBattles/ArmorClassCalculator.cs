@@ -4,7 +4,8 @@
     {
         public int CalculateAC(Creature character)
         {
-            return 10 + character.GetAttributeModifier(Attributes.Dexterity);
+            Armor armor = character.GetArmor();
+            return armor.ac + character.GetAttributeModifier(Attributes.Dexterity);
         }
     }
 }
