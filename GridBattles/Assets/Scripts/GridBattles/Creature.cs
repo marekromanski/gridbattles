@@ -91,5 +91,15 @@ namespace GridBattles
         {
             return _weapon;
         }
+
+        public int GetAttribute(Attributes attribute)
+        {
+            return _attributes[attribute];
+        }
+
+        public int GetAttributeModifier(Attributes attribute)
+        {
+            return AbilityScoreCalculator.CalculateModifier(GetAttribute(attribute));
+        }
     }
 }
