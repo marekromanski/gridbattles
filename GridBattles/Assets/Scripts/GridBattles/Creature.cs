@@ -6,7 +6,6 @@ namespace GridBattles
     {
         private int _level;
         private int _hitPoints;
-        private int _ac;
         private IHittingPolicy _hittingPolicy;
         private readonly Dictionary<Attributes, int> _attributes;
         private IWeapon _weapon;
@@ -16,7 +15,6 @@ namespace GridBattles
         {
             _level = 1;
             _hitPoints = 0;
-            _ac = 10;
             _weapon = new UnarmedStrike();
 
             _attributes = new Dictionary<Attributes, int>
@@ -60,7 +58,7 @@ namespace GridBattles
 
         public int GetAc()
         {
-            return _ac;
+            return new ArmorClassCalculator().CalculateAC(this);
         }
 
         public int GetStrength()
