@@ -30,7 +30,28 @@ namespace Tests
             AssertCharacterWearingLightArmorHasAcEqualToArmorAcPlusDexterityModifier(13, 20, 18);
         }
 
-        private static void AssertCharacterWearingLightArmorHasAcEqualToArmorAcPlusDexterityModifier(int armorAc, int dexterity,
+        [Test]
+        public void CharacterWearingMediumArmorHasAcEqualToArmorAcPlusDexModifierUpToPlus2()
+        {
+            AssertCharacterWearingMediumArmorHasAcEqualToArmorAcPlusDexterityModifier(13, 10, 13);
+            AssertCharacterWearingMediumArmorHasAcEqualToArmorAcPlusDexterityModifier(13, 14, 15);
+            AssertCharacterWearingMediumArmorHasAcEqualToArmorAcPlusDexterityModifier(13, 16, 15);
+        }
+
+        private static void AssertCharacterWearingMediumArmorHasAcEqualToArmorAcPlusDexterityModifier(int armorAc,
+            int dexterity,
+            int expectedAc)
+        {
+            Armor lightArmor = new Armor(Armor.Kind.Medium, armorAc);
+            Creature character = new Creature();
+            character.SetAttribute(Attributes.Dexterity, dexterity);
+            character.PutOnArmor(lightArmor);
+            var sut = new ArmorClassCalculator();
+            Assert.AreEqual(expectedAc, sut.CalculateAc(character));
+        }
+
+        private static void AssertCharacterWearingLightArmorHasAcEqualToArmorAcPlusDexterityModifier(int armorAc,
+            int dexterity,
             int expectedAc)
         {
             Armor lightArmor = new Armor(Armor.Kind.Light, armorAc);
@@ -38,7 +59,7 @@ namespace Tests
             character.SetAttribute(Attributes.Dexterity, dexterity);
             character.PutOnArmor(lightArmor);
             var sut = new ArmorClassCalculator();
-            Assert.AreEqual(expectedAc, sut.CalculateAC(character));
+            Assert.AreEqual(expectedAc, sut.CalculateAc(character));
         }
 
         private static void AssertAcIsBasedOnCharacterDexterity(int dexterity, int expectedAc)
@@ -46,7 +67,7 @@ namespace Tests
             Creature character = new Creature();
             character.SetAttribute(Attributes.Dexterity, dexterity);
             var sut = new ArmorClassCalculator();
-            Assert.AreEqual(expectedAc, sut.CalculateAC(character));
+            Assert.AreEqual(expectedAc, sut.CalculateAc(character));
         }
     }
 }

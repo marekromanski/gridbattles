@@ -58,7 +58,7 @@ namespace GridBattles
 
         public int GetAc()
         {
-            return new ArmorClassCalculator().CalculateAC(this);
+            return new ArmorClassCalculator().CalculateAc(this);
         }
 
         public int GetStrength()

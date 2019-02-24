@@ -9,8 +9,8 @@ namespace GridBattles
             Heavy
         }
 
-        public Kind kind;
-        public int ac;
+        public readonly Kind kind;
+        public readonly int ac;
 
         public Armor(Kind armorKind, int armorAc)
         {
