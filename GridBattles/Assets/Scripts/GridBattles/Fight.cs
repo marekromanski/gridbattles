@@ -4,14 +4,14 @@ namespace GridBattles
 {
     public class Fight
     {
-        private List<FightParticipant> _participants;
+        private readonly List<IFightParticipant> _participants;
 
         public Fight()
         {
-            _participants = new List<FightParticipant>();
+            _participants = new List<IFightParticipant>();
         }
 
-        public void AddParticipants(IEnumerable<FightParticipant> participants)
+        public void AddParticipants(IEnumerable<IFightParticipant> participants)
         {
             if (participants != null)
             {
@@ -25,8 +25,11 @@ namespace GridBattles
             bool hostileParticipants = false;
             foreach (var participant in _participants)
             {
-                alliedParticipants = alliedParticipants || !participant.isHostile;
-                hostileParticipants = hostileParticipants || participant.isHostile;
+                if (participant.IsConscious())
+                {
+                    alliedParticipants = alliedParticipants || !participant.IsHostile();
+                    hostileParticipants = hostileParticipants || participant.IsHostile();
+                }
             }
 
             return !(alliedParticipants && hostileParticipants);
@@ -34,8 +37,9 @@ namespace GridBattles
     }
 
 
-    public class FightParticipant
+    public interface IFightParticipant
     {
-        public bool isHostile;
+        bool IsHostile();
+        bool IsConscious();
     }
 }

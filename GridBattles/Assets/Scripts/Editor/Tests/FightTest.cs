@@ -32,7 +32,7 @@ namespace Tests
         [Test]
         public void FightWithNoParticipantsEndsImmediately()
         {
-            _fight.AddParticipants(new List<FightParticipant>());
+            _fight.AddParticipants(new List<IFightParticipant>());
 
             Assert.IsTrue(_fight.IsFinished());
         }
@@ -40,43 +40,100 @@ namespace Tests
         [Test]
         public void FightWithOneParticipantsEndsImmediately()
         {
-            var participants = new List<FightParticipant> {AlliedFightParticipant()};
+            var participants = new List<IFightParticipant> {AlliedFightParticipant()};
             _fight.AddParticipants(participants);
 
             Assert.IsTrue(_fight.IsFinished());
         }
-        
+
         [Test]
         public void FightWithOneHostileParticipantsEndsImmediately()
         {
-            var participants = new List<FightParticipant> {HostileFightParticipant()};
+            var participants = new List<IFightParticipant> {HostileFightParticipant()};
             _fight.AddParticipants(participants);
 
             Assert.IsTrue(_fight.IsFinished());
         }
 
-        private static FightParticipant HostileFightParticipant()
+        [Test]
+        public void FightWithOnlyHostileParticipantsEndsImmediately()
         {
-            return new FightParticipant {isHostile = true};
+            _fight.AddParticipants(HostileFightParticipants());
+            Assert.IsTrue(_fight.IsFinished());
         }
 
         [Test]
-        public void FightWithTwoHostileParticipantsIsStarted()
+        public void FightWithTwoMixedParticipantsIsStarted()
         {
-            var participants = HostileFightParticipants();
-            _fight.AddParticipants(participants);
+            _fight.AddParticipants(MixedFightParticipants());
 
             Assert.IsFalse(_fight.IsFinished());
         }
 
-        private static List<FightParticipant> HostileFightParticipants()
+        [Test]
+        public void FightWithMixedParticipantsWhereHostilesAreUnconsciousEnds()
         {
-            return new List<FightParticipant> {AlliedFightParticipant(), HostileFightParticipant()};
+            var participants = new List<IFightParticipant>
+                {AlliedFightParticipant(), HostileUnconsciousFightParticipant()};
+            _fight.AddParticipants(participants);
+
+            Assert.IsTrue(_fight.IsFinished());
         }
 
-        private static FightParticipant AlliedFightParticipant()
+        [Test]
+        public void FightWithMixedParticipantsWhereAlliesAreUnconsciousEnds()
         {
-            return new FightParticipant();
+            var participants = new List<IFightParticipant>
+                {AlliedUnconsciousFightParticipant(), HostileFightParticipant()};
+            _fight.AddParticipants(participants);
+
+            Assert.IsTrue(_fight.IsFinished());
+        }
+
+        private IEnumerable<IFightParticipant> HostileFightParticipants()
+        {
+            return new List<IFightParticipant> {HostileFightParticipant(), HostileFightParticipant()};
+        }
+
+        private static List<IFightParticipant> MixedFightParticipants()
+        {
+            return new List<IFightParticipant> {AlliedFightParticipant(), HostileFightParticipant()};
+        }
+
+        private static IFightParticipant HostileFightParticipant()
+        {
+            return new StubFightParticipant {isHostile = true, isConscious = true};
+        }
+
+        private static IFightParticipant AlliedFightParticipant()
+        {
+            return new StubFightParticipant {isHostile = false, isConscious = true};
+        }
+
+        private static IFightParticipant HostileUnconsciousFightParticipant()
+        {
+            return new StubFightParticipant {isHostile = true, isConscious = false};
+        }
+
+        private static IFightParticipant AlliedUnconsciousFightParticipant()
+        {
+            return new StubFightParticipant {isHostile = false, isConscious = false};
+        }
+    }
+
+    public class StubFightParticipant : IFightParticipant
+    {
+        public bool isHostile;
+        public bool isConscious;
+
+        public bool IsHostile()
+        {
+            return isHostile;
+        }
+
+        public bool IsConscious()
+        {
+            return isConscious;
         }
     }
 }
