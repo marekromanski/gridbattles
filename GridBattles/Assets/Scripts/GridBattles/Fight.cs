@@ -41,5 +41,8 @@ namespace GridBattles
     {
         bool IsHostile();
         bool IsConscious();
+
+        int GetInitiative();
+
     }
 }

@@ -7,6 +7,7 @@ namespace Tests.Helpers
     {
         public bool isHostile;
         public bool isConscious;
+        public int initiative;
 
         public bool IsHostile()
         {
@@ -16,6 +17,11 @@ namespace Tests.Helpers
         public bool IsConscious()
         {
             return isConscious;
+        }
+
+        public int GetInitiative()
+        {;
+            return initiative;
         }
 
         public static IEnumerable<IFightParticipant> HostileFightParticipants()
